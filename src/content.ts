@@ -6,15 +6,14 @@ interface EnvVariable {
 
 function crawlVercelPage(): EnvVariable[] {
   const variables: EnvVariable[] = [];
-  const rows = document.querySelectorAll('.env-var-row');
+  const rows = document.querySelectorAll('[class^="env-variables-table_resultRow"]');
 
   rows.forEach((row) => {
-    const name = row.querySelector('.env-var-name')?.textContent?.trim() || '';
-    const environments = Array.from(row.querySelectorAll('.env-var-environment'))
-      .map(env => env.textContent?.trim() || '')
+    const name = row.querySelector('[class^="env-variables-table_varName"]')?.textContent?.trim() || '';
+    const environments = row.querySelector('[class^="entity_description"]')?.textContent?.trim()?.split(", ")
       .filter(env => env !== '');
 
-    variables.push({ name, environments });
+    variables.push({ name, environments: environments ?? [] });
   });
 
   return variables;
