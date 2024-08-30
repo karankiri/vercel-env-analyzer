@@ -3,7 +3,7 @@
   "name": "Vercel Environment Variable Analyzer",
   "version": "1.0",
   "description": "Analyzes Vercel environment variables across environments",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html"
   },
