@@ -23,25 +23,7 @@ function analyzeMissingVariables(variables: EnvVariable[]): Record<string, strin
 function DisplayResults({ variables, missingVariables }: { variables: EnvVariable[], missingVariables: Record<string, string[]> }) {
   return (
     <div>
-      <h2 className="text-xl font-semibold mt-4 mb-2">Environment Variables:</h2>
-      <table className="min-w-full">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Environments</th>
-          </tr>
-        </thead>
-        <tbody>
-          {variables.map(v => (
-            <tr key={v.name}>
-              <td className="border px-4 py-2">{v.name}</td>
-              <td className="border px-4 py-2">{v.environments.join(', ')}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2 className="text-xl font-semibold mt-4 mb-2">Missing Variables:</h2>
+      <h2 className="text-2xl font-semibold mt-4 mb-2">Missing Variables:</h2>
       {Object.entries(missingVariables).map(([env, vars]) => (
         <div key={env}>
           <h3 className="text-lg font-medium mt-2">{env}:</h3>
@@ -52,6 +34,24 @@ function DisplayResults({ variables, missingVariables }: { variables: EnvVariabl
           </ul>
         </div>
       ))}
+
+      <h2 className="text-2xl font-semibold mt-4 mb-2">Environment Variables:</h2>
+      <table className="min-w-full border-collapse border border-gray-300">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="px-6 py-3 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Name</th>
+            <th className="px-6 py-3 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Environments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {variables.map(v => (
+            <tr key={v.name} className="hover:bg-gray-100">
+              <td className="border px-6 py-4">{v.name}</td>
+              <td className="border px-6 py-4">{v.environments.join(', ')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -79,13 +79,17 @@ function IndexPopup() {
   }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div className="p-10 min-w-[500px]"> {/* {{ edit_1 }} */}
       <h1 className="text-2xl font-bold mb-4">Vercel Env Analyzer</h1>
       <button id="analyzeBtn" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAnalyzeClick}>
         Analyze Variables
       </button>
       {loading && <div className="loader">Loading...</div>} {/* {{ edit_4 }} */}
-      <DisplayResults variables={variables} missingVariables={missingVariables} />
+      {
+        variables.length > 0 ?
+          <DisplayResults variables={variables} missingVariables={missingVariables} />
+          : null
+      }
     </div>
   );
 }
