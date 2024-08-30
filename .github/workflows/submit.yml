@@ -34,6 +34,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: build
+    if: github.event_name == 'release'  # Ensure this job only runs on release events
     steps:
       - uses: actions/checkout@v4
       - name: Upload Release Asset
