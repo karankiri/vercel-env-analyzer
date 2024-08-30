@@ -1,9 +1,0 @@
-/* src/styles.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* You can add any custom styles here if needed */
-body {
-  min-width: 300px;
-}
