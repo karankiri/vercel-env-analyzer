@@ -1,5 +1,8 @@
 name: "Submit to Web Store"
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -27,8 +30,22 @@ jobs:
         run: pnpm build
       - name: Package the extension into a zip artifact
         run: pnpm package
-      - name: Browser Platform Publish
-        uses: PlasmoHQ/bpp@v3
+      # Removed the Browser Platform Publish step
+      # - name: Browser Platform Publish
+      #   uses: PlasmoHQ/bpp@v3
+      #   with:
+      #     keys: ${{ secrets.SUBMIT_KEYS }}
+      #     artifact: build/chrome-mv3-prod.zip
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
         with:
-          keys: ${{ secrets.SUBMIT_KEYS }}
-          artifact: build/chrome-mv3-prod.zip
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/chrome-mv3-prod.zip
+          asset_name: chrome-mv3-prod.zip
+          asset_content_type: application/zip
