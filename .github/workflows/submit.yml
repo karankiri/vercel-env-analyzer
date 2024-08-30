@@ -27,16 +27,12 @@ jobs:
         with:
           version: 6.14.0  # Specify a stable version
           run_install: true
+      - name: Verify pnpm installation
+        run: pnpm --version  # Check if pnpm is installed
       - name: Build the extension
         run: pnpm build
       - name: Package the extension into a zip artifact
         run: pnpm package
-      # Removed the Browser Platform Publish step
-      # - name: Browser Platform Publish
-      #   uses: PlasmoHQ/bpp@v3
-      #   with:
-      #     keys: ${{ secrets.SUBMIT_KEYS }}
-      #     artifact: build/chrome-mv3-prod.zip
 
   publish:
     runs-on: ubuntu-latest
