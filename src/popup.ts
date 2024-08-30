@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs[0].id) {
           chrome.tabs.sendMessage(tabs[0].id, { action: 'crawlPage' }, (response) => {
+            console.log("🚀 ~ chrome.tabs.sendMessage ~ response:", response)
             if (response && response.variables) {
               const missingVariables = analyzeMissingVariables(response.variables);
               displayResults(response.variables, missingVariables);
