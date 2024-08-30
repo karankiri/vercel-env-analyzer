@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Vercel Environment Variable Analyzer",
+  "version": "1.0",
+  "description": "Analyzes Vercel environment variables across environments",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vercel.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
