@@ -1,6 +1,18 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Vercel Env Analyzer
 
-## Getting Started
+## How to Use
+
+1. Download the ZIP file from the [Releases](#) section.
+2. Unzip the downloaded file.
+3. Open Chrome and navigate to `chrome://extensions`.
+4. Enable **Developer mode** in the top right corner.
+5. Click on **Load unpacked** and select the unzipped folder.
+6. Go to Vercel and open the settings of your favorite project.
+7. Navigate to the **Environment Variables** screen.
+8. Open the extension and click on **Analyze Variables**.
+9. Wait for the results to arrive and view them in the extension.
+
+## Developer Guide
 
 First, run the development server:
 
